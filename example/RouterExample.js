@@ -44,50 +44,11 @@ function App() {
         {/* 放切頁時不重新渲染的部份 e*/}
         {/* 路由設定開始 */}
         <ScrollToTop>
-          <Switch>
-            {/* 首頁 */}
-            <Route exact path='/'>
-              <Home />
-            </Route>
-
-            {/* 主計入口 */}
-            <Route exact path='/chairEntry'>
-              <ChairEntry />
-            </Route>
-
-            {/* 主計儀表板 */}
-            <Route exact path='/chair'>
-              <Chair />
-            </Route>
-
-            {/* 評審入口 */}
-            <Route exact path='/trialEntry'>
-              <TrialEntry />
-            </Route>
-  
-            {/* 評審 */}
-            <Route exact path='/trial'>
-              <Trial />
-            </Route>
-
-            {/* 評判反饋畫面 */}
-            <Route exact path='/monitor'>
-              <Monitor />
-            </Route>
-    
-            {/* 結果 */}
-            <Route exact path='/result'>
-              <Result />
-            </Route>
-            
-            {/* 結果(for個別評審) */}
-            <Route exact path='/resultForJuror'>
-              <ResultForJuror />
-            </Route>
-
-
-          </Switch>
+          <Switch></Switch>
         </ScrollToTop>
+        <Route exact path='/'>
+          <Home />
+        </Route>
       </>
     </Router>
   );
