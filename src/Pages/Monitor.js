@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Monitor() {
-  return <div></div>;
+  return <div>Monitor</div>;
 }
 
 export default Monitor;

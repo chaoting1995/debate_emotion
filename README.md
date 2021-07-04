@@ -2,14 +2,14 @@
 
 # Router
 
-home  
-|-- chairEntry
-|-- chair
-|-- trialEntry
-|-- trial
-|-- monitor
-|-- result
-|-- resultForJuror
+/home  
+|-- /chairEntry
+|-- /chair
+|-- /trialEntry
+|-- /trial
+|-- /monitor
+|-- /result
+|-- /resultForJuror
 
 # Web Road Map
 

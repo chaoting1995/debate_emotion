@@ -1,7 +1,7 @@
 import React from 'react';
 
 function ChairEntry(props) {
-  return <></>;
+  return <> ChairEntry</>;
 }
 
 export default ChairEntry;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Chair(props) {
-  return <></>;
+  return <>Chair</>;
 }
 
 export default Chair;

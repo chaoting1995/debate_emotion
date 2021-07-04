@@ -1,27 +1,106 @@
 import React, { useState, useEffect } from 'react';
+// 按鈕音效
+import btnAudio from 'Audio/yisell_sound_2014041023051918567_88366.mp3';
 
-import btnAudio from '../src/audio/yisell_sound_2014041023051918567_88366.mp3';
+import TmepoTimer from 'Components/TmepoTimer';
+import TrafficBar from 'Components/TrafficBar';
+import EmotionBar from 'Components/EmotionBar';
+
+import styled from '@emotion/styled';
+//------------------------------------
+
+const TrialUI = styled.div`
+  ${'' /* background-color: #eee; */};
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+  & > div {
+    width: 100%;
+  }
+  & > div:nth-of-type(1) {
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+    & > .time {
+      font-size: 100px;
+      margin-bottom: 15px;
+    }
+    & > .round {
+      font-size: 25px;
+      color: #383d41;
+      background-color: #e2e3e5;
+      box-sizing: border-box;
+      padding: 5px 15px;
+      border: 1px solid #d6d8db;
+      border-radius: 10px;
+      text-align: center;
+    }
+  }
+  & > div:nth-of-type(2) {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    & > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      & > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        ${'' /* background-color: #eee; */}
+      }
+      & > .side-icon-wrap {
+        width: 100%;
+      }
+      & > .side-icon-wrap.text-q {
+        justify-content: flex-start;
+        margin-left: 70px;
+      }
+      & > .side-icon-wrap.text-a {
+        justify-content: flex-end;
+        margin-right: 70px;
+      }
+      & > .side-icon-wrap > .side-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 100px;
+        background-color: #858585;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+        position: relative;
+        top: 0;
+        color: #eee;
+        font-size: 27px;
+        font-weight: bold;
+      }
+    }
+  }
+`;
 
 function Trial(props) {
   const [countdown, setCountdown] = useState(0);
   const [countdownSetting, setCountdownSetting] = useState(0);
+  // 初始計時時間
   const [initTime, setInitTime] = useState(0);
-
+  // 情緒進度條: 顏色資料
   const [colorArr, setColorArr] = useState([]);
   const [colorCurrent, setColorCurrent] = useState(2);
   //------------------------------------
 
   useEffect(() => {
-    // console.log('a initTime',initTime);
-    // 設定即時顏色進度條
-    let creatInitArr = (amount) => {
-      return Array.from({ length: amount }, (v) => 0);
-    };
-    setColorArr(creatInitArr(initTime));
-
     // 設定倒數計時器
     setCountdown(countdownSetting);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initTime]);
 
@@ -30,25 +109,12 @@ function Trial(props) {
       if (countdown > 0) {
         setCountdown(countdown - 1);
         setCountdownSetting(countdown - 1);
-        // 持續改變顏色
       }
     };
     setTimeout(() => handleCountdown(), 1000);
 
-    const handleColorChange = () => {
-      let colorArrIndex = initTime - countdown;
-      let newColorArr = [...colorArr];
-      newColorArr[colorArrIndex] = colorCurrent;
-      setColorArr(newColorArr);
-    };
-    setTimeout(() => handleColorChange(), 500);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countdown]);
-
-  //---------------------------------------
-
-  const colorConverter = ['bg-light', 'bg-success', 'bg-warning', 'bg-danger'];
 
   //---------------------------------------
 
@@ -59,121 +125,75 @@ function Trial(props) {
   //---------------------------------------
   return (
     <>
-      <div className="-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-4 d-flex justify-content-center align-items-center flex-column'>
-              <div
-                className='alert alert-secondary text-center'
-                style={{ width: '100px' }}
-                role='alert'
-              >
-                <h3> {countdown}</h3>
-                <div>sec</div>
-              </div>
-              <div className='form-group'>
-                <input
-                  type='number'
-                  className='form-control mb-3 text-center'
-                  style={{ width: '100px' }}
-                  value={countdownSetting}
-                  onChange={(e) => {
-                    setCountdownSetting(+e.target.value);
-                  }}
-                />
-              </div>
-              <button
-                type='button'
-                className='btn btn-primary'
-                onClick={() => {
-                  // 記錄初始值
-                  setInitTime(countdownSetting);
-                }}
-              >
-                開始
-              </button>
-            </div>
-            {/* -------------------------------------------- */}
+      <TrialUI className="container">
+        {/* ------------------------------------ */}
+        <div className="row">
+          <div className="time">00:00</div>
+          <div className="round">正方二辯申論</div>
+        </div>
 
-            <div className='col-4'>
-              <div
-                className='bg-dark d-flex justify-content-center align-items-center flex-column py-3'
-                style={{
-                  width: '140px',
-                  borderRadius: '50px',
-                }}
-              >
-                <button
-                  type='button'
-                  className='btn btn-success my-2'
-                  style={{
-                    width: '60px',
-                    height: '60px',
-                    borderRadius: '99999px',
-                  }}
-                  onClick={() => {
-                    console.log('success');
-                    setColorCurrent(1);
-                    handleBtnAudio();
-                  }}
-                ></button>
-                <button
-                  type='button'
-                  className='btn btn-warning my-2'
-                  style={{
-                    width: '60px',
-                    height: '60px',
-                    borderRadius: '99999px',
-                  }}
-                  onClick={() => {
-                    console.log('warning');
-                    setColorCurrent(2);
-                    handleBtnAudio();
-                  }}
-                ></button>
-                <button
-                  type='button'
-                  className='btn btn-danger my-2'
-                  style={{
-                    width: '60px',
-                    height: '60px',
-                    borderRadius: '99999px',
-                  }}
-                  onClick={() => {
-                    console.log('danger');
-                    setColorCurrent(3);
-                    handleBtnAudio();
-                  }}
-                ></button>
-              </div>
+        {/* ------------------------------------ */}
+        <div className="row">
+          <div>
+            <div className="side-icon-wrap text-q">
+              <div className="side-icon">Q</div>
             </div>
-            <div className='col-4'>
-              <div
-                className='bg-light h-100'
-                style={{
-                  width: '70px',
-                  borderRadius: '15px',
-                  overflow: 'hidden',
-                }}
-              >
-                {colorArr.map((item, index) => {
-                  return (
-                    <div
-                      key={index}
-                      style={{
-                        height: `${100 / initTime}%`,
-                        transition: '0.2s',
-                        // borderBottom: '0.1px solid #eee',
-                      }}
-                      className={`w-100 ${colorConverter[item]}`}
-                    ></div>
-                  );
-                })}
-              </div>
+            <div>
+              {/* 心情按鈕群 */}
+              <TrafficBar
+                setColorCurrent={setColorCurrent}
+                handleBtnAudio={handleBtnAudio}
+              />
+              {/* 心情溫度計 */}
+              <EmotionBar
+                initTime={initTime}
+                colorArr={colorArr}
+                setColorArr={setColorArr}
+                colorCurrent={colorCurrent}
+                countdown={countdown}
+              />
+            </div>
+          </div>
+          {/* ------------------------------------ */}
+          <div>
+            <div className="side-icon-wrap  text-a">
+              <div className="side-icon ">A</div>
+            </div>
+            <div>
+              {/* 心情溫度計 */}
+              <EmotionBar
+                initTime={initTime}
+                colorArr={colorArr}
+                setColorArr={setColorArr}
+                colorCurrent={colorCurrent}
+                countdown={countdown}
+              />
+              {/* 心情按鈕群 */}
+              <TrafficBar
+                setColorCurrent={setColorCurrent}
+                handleBtnAudio={handleBtnAudio}
+              />
             </div>
           </div>
         </div>
-      </div>
+
+        {/* 暫時的計時器 */}
+        <div
+          style={{
+            position: 'absolute',
+            left: '20px',
+            opacity: '0.6',
+            width: '100px',
+          }}
+        >
+          <TmepoTimer
+            countdown={countdown}
+            countdownSetting={countdownSetting}
+            setCountdownSetting={setCountdownSetting}
+            setInitTime={setInitTime}
+          />
+        </div>
+      </TrialUI>
     </>
   );
 }
