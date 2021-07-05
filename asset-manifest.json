@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/debate_emotion/static/css/main.6ae0793b.chunk.css",
+    "main.js": "/debate_emotion/static/js/main.050626c2.chunk.js",
+    "main.js.map": "/debate_emotion/static/js/main.050626c2.chunk.js.map",
+    "runtime-main.js": "/debate_emotion/static/js/runtime-main.7111d721.js",
+    "runtime-main.js.map": "/debate_emotion/static/js/runtime-main.7111d721.js.map",
+    "static/css/2.679831fc.chunk.css": "/debate_emotion/static/css/2.679831fc.chunk.css",
+    "static/js/2.f88116e1.chunk.js": "/debate_emotion/static/js/2.f88116e1.chunk.js",
+    "static/js/2.f88116e1.chunk.js.map": "/debate_emotion/static/js/2.f88116e1.chunk.js.map",
+    "static/js/3.dfabaf07.chunk.js": "/debate_emotion/static/js/3.dfabaf07.chunk.js",
+    "static/js/3.dfabaf07.chunk.js.map": "/debate_emotion/static/js/3.dfabaf07.chunk.js.map",
+    "index.html": "/debate_emotion/index.html",
+    "service-worker.js": "/debate_emotion/service-worker.js",
+    "service-worker.js.map": "/debate_emotion/service-worker.js.map",
+    "static/css/2.679831fc.chunk.css.map": "/debate_emotion/static/css/2.679831fc.chunk.css.map",
+    "static/css/main.6ae0793b.chunk.css.map": "/debate_emotion/static/css/main.6ae0793b.chunk.css.map",
+    "static/js/2.f88116e1.chunk.js.LICENSE.txt": "/debate_emotion/static/js/2.f88116e1.chunk.js.LICENSE.txt",
+    "static/media/yisell_sound_2014041023051918567_88366.75a762bf.mp3": "/debate_emotion/static/media/yisell_sound_2014041023051918567_88366.75a762bf.mp3"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7111d721.js",
+    "static/css/2.679831fc.chunk.css",
+    "static/js/2.f88116e1.chunk.js",
+    "static/css/main.6ae0793b.chunk.css",
+    "static/js/main.050626c2.chunk.js"
+  ]
+}
