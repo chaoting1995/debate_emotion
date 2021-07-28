@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 const EmotionBarUI = styled.div`
   ${'' /* background-color: #f8f9fa; */}
   background-color: #ccc;
-  width: 25px;
+  width: ${({ width }) => width}px;
   height: 330px;
   border-radius: 15px;
   overflow: hidden;
@@ -19,17 +19,18 @@ const EmotionBarUI = styled.div`
 `;
 
 function EmotionBar(props) {
-  const { initTime, colorArr, setColorArr, colorCurrent, countdown } = props;
+  const { initTime, colorArr, setColorArr, colorCurrent, countdown, width } =
+    props;
 
   //---------------------------------------
   // 顏色轉換配置
   const colorConverter = ['bg-light', '#218838', '#e0a800', '#dc3545'];
-  const colorConverter111 = [
-    'bg-light',
-    'bg-success',
-    'bg-warning',
-    'bg-danger',
-  ];
+  // const colorConverter111 = [
+  //   'bg-light',
+  //   'bg-success',
+  //   'bg-warning',
+  //   'bg-danger',
+  // ];
 
   //---------------------------------------
   useEffect(() => {
@@ -57,7 +58,7 @@ function EmotionBar(props) {
 
   return (
     <>
-      <EmotionBarUI>
+      <EmotionBarUI width={width}>
         {colorArr.map((item, index) => {
           return (
             <div

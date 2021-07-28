@@ -10,7 +10,7 @@ function LoginModalContent(props) {
           type="text"
           className="form-control form-control-lg"
           placeholder="account"
-          autofocus
+          autoFocus
         />
       </label>
       <label className="d-flex align-items-center mb-3">

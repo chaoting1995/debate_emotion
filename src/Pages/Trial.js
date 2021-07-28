@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+
+import { Howl } from 'howler';
 // 按鈕音效
 import btnAudio from 'Audio/yisell_sound_2014041023051918567_88366.mp3';
 
@@ -118,9 +120,16 @@ function Trial(props) {
 
   //---------------------------------------
 
+  // const handleBtnAudio_Old = () => {
+  //   const audio = new Audio(btnAudio);
+  //   audio.play();
+  // };
+  //---------------------------------------
   const handleBtnAudio = () => {
-    let audio = new Audio(btnAudio);
-    audio.play();
+    const sound = new Howl({
+      src: [btnAudio],
+    });
+    sound.play();
   };
   //---------------------------------------
   return (
@@ -146,6 +155,7 @@ function Trial(props) {
               />
               {/* 心情溫度計 */}
               <EmotionBar
+                width="25"
                 initTime={initTime}
                 colorArr={colorArr}
                 setColorArr={setColorArr}
@@ -162,6 +172,7 @@ function Trial(props) {
             <div>
               {/* 心情溫度計 */}
               <EmotionBar
+                width="25"
                 initTime={initTime}
                 colorArr={colorArr}
                 setColorArr={setColorArr}

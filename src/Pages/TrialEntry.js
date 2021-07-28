@@ -156,13 +156,14 @@ function TrialEntry(props) {
       // 尚未坐下時
       if (!currantID) {
         handleSitState(id);
-
+        handleBtnAudio();
         // 已經坐下時
       } else {
         // => 只能點選自己座位
         if (id === currantID) {
           // 離座
           handleSitState(id, 'clear');
+          handleBtnAudio();
         }
       }
     }
@@ -194,7 +195,6 @@ function TrialEntry(props) {
                 jurorName={item.name}
                 setJurorInfo={setJurorInfo}
                 onClick={() => {
-                  handleBtnAudio();
                   handleSit(item.id);
                 }}
               />
