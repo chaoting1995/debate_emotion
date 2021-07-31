@@ -34,6 +34,7 @@ function TrafficBar(props) {
         {['success', 'warning', 'danger'].map((item, index) => {
           return (
             <button
+              key={index}
               type="button"
               className={`btn btn-${item}`}
               onClick={() => {

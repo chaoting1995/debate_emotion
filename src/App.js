@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // 引入react router => 用於制定路由
 import {
@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 
 // 引入共用元件
-import Navbar from 'Components/Modules/Navbar';
+import Header from 'Components/Modules/Header';
 
 // 引入 頁面元件
 import Home from 'Pages/Home';
@@ -23,21 +23,24 @@ import ResultForJuror from 'Pages/ResultForJuror';
 
 //------------------------------------
 function App() {
-  const [showBar] = useState(false);
-  // 路由表
+  const [showBar] = useState(true);
+  // 記住登入狀態
+  const getUserInfo = JSON.parse(localStorage.getItem('DE_userInfo'));
+  const [userInfo, setUserInfo] = useState(getUserInfo);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const handleShowLoginModal = () => setShowLoginModal(true);
 
+  // 路由表
   //---------------------------------------
   return (
     // <Router>元件一定要放在最外層
     <Router>
       {/* 放切頁時不重新渲染的部份 s*/}
       <div style={{ display: !showBar && 'none' }}>
-        <Navbar
-        // setShowLoginModal={setShowLoginModal}
-        // showLoginModal={showLoginModal}
-        // setIsLogin={setIsLogin}
-        // isLogin={isLogin}
-        // currentUser={currentUser}
+        <Header
+          userInfo={userInfo}
+          setUserInfo={setUserInfo}
+          handleShowLoginModal={handleShowLoginModal}
         />
       </div>
       {/* 放切頁時不重新渲染的部份 e*/}
@@ -45,7 +48,13 @@ function App() {
       <Switch>
         {/* 首頁 */}
         <Route exact path="/">
-          <Home />
+          <Home
+            userInfo={userInfo}
+            setUserInfo={setUserInfo}
+            showLoginModal={showLoginModal}
+            setShowLoginModal={setShowLoginModal}
+            handleShowLoginModal={handleShowLoginModal}
+          />
         </Route>
 
         {/* 主計入口 */}

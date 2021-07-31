@@ -36,8 +36,8 @@ function App() {
           <Navbar
           // setShowLoginModal={setShowLoginModal}
           // showLoginModal={showLoginModal}
-          // setIsLogin={setIsLogin}
-          // isLogin={isLogin}
+          // setUserInfo={setUserInfo}
+          // userInfo={userInfo}
           // currentUser={currentUser}
           />
         </div>
@@ -46,7 +46,7 @@ function App() {
         <ScrollToTop>
           <Switch></Switch>
         </ScrollToTop>
-        <Route exact path='/'>
+        <Route exact path="/">
           <Home />
         </Route>
       </>

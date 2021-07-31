@@ -9,6 +9,7 @@ import LoginModalContent from 'Components/LoginModalContent';
 //   // 直接撰寫 CSS
 // `;
 
+// 子元件
 function HomeButton(props) {
   const { btnText, onClick } = props;
   return (
@@ -26,9 +27,15 @@ function HomeButton(props) {
 }
 
 function Home(props) {
-  const [showLoginModal, setShowLoginModal] = useState(false);
+  const {
+    userInfo,
+    setUserInfo,
+    showLoginModal,
+    setShowLoginModal,
+    handleShowLoginModal,
+  } = props;
   const [loginTo, setLoginTo] = useState('');
-  const handleShow = () => setShowLoginModal(true);
+
   return (
     <>
       <div className="container">
@@ -47,9 +54,10 @@ function Home(props) {
           <HomeButton
             btnText="Chair"
             onClick={() => {
-              handleShow();
+              !userInfo
+                ? handleShowLoginModal()
+                : props.history.push('/chairEntry');
               setLoginTo('Chair');
-              // props.history.push('/chairEntry');
             }}
           />
 
@@ -62,22 +70,24 @@ function Home(props) {
           <HomeButton
             btnText="Monitor"
             onClick={() => {
-              handleShow();
+              !userInfo
+                ? handleShowLoginModal()
+                : props.history.push('/monitor');
               setLoginTo('Monitor');
-              // props.history.push('/monitor');
             }}
           />
         </div>
-        <LoginModal
-          show={showLoginModal}
-          setShow={setShowLoginModal}
-          modalTitle="Login"
-        >
+        <LoginModal show={showLoginModal} setShow={setShowLoginModal}>
           <LoginModalContent
-            handleLogin={() => {
+            userInfo={userInfo}
+            setUserInfo={setUserInfo}
+            setShow={setShowLoginModal}
+            handleRedirect={() => {
               loginTo === 'Chair' && props.history.push('/chairEntry');
               loginTo === 'Monitor' && props.history.push('/monitor');
+              // setLoginTo('');
             }}
+            {...props}
           />
         </LoginModal>
       </div>

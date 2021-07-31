@@ -6,7 +6,7 @@ import { FaUser, FaPlus, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 // 按鈕音效
 import btnAudio from 'Audio/yisell_sound_2014041023051918567_88366.mp3';
 // Juror info
-import jurorInit from 'styles/info/jurorInfo';
+import jurorInit from 'info/jurorInfo';
 
 // CSS in JS
 import styled from '@emotion/styled';

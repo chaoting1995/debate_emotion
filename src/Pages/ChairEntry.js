@@ -6,7 +6,7 @@ import { FaUser, FaPlus, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 // 按鈕音效
 import btnAudio from 'Audio/yisell_sound_2014041023051918567_88366.mp3';
 // Juror info
-import jurorInit from 'styles/info/jurorInfo';
+import jurorInit from 'info/jurorInfo';
 
 // CSS in JS
 import styled from '@emotion/styled';
@@ -199,10 +199,10 @@ function ChairEntry(props) {
           }}
         />
         <div className=" row align-items-center justify-content-center">
-          <button type="button" class="btn btn-info btn-lg mb-3" disabled>
+          <button type="button" className="btn btn-info btn-lg mb-3" disabled>
             賽制選擇
           </button>
-          <button type="button" class="btn btn-info btn-lg" disabled>
+          <button type="button" className="btn btn-info btn-lg" disabled>
             功能尚未開啟
           </button>
         </div>
@@ -225,7 +225,7 @@ function ChairEntry(props) {
         <div className="row align-items-center justify-content-around">
           <button
             type="button"
-            class="btn btn-info btn-lg"
+            className="btn btn-info btn-lg"
             onClick={() => {
               props.history.push('/chair');
             }}
