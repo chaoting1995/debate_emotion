@@ -110,6 +110,7 @@ const MonitorUI = styled.div`
 `;
 
 function Monitor(props) {
+  const { userInfo } = props;
   const [countdown, setCountdown] = useState(0);
   const [countdownSetting, setCountdownSetting] = useState(0);
   // 初始計時時間

@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 // Icon
 import { FaUser, FaPlus, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 // 按鈕音效
-import btnAudio from 'Audio/yisell_sound_2014041023051918567_88366.mp3';
+import btnAudio from 'Audio//click.mp3';
 // Juror info
 import jurorInit from 'info/jurorInfo';
 
@@ -123,8 +123,20 @@ const ChairEntryUI = styled.div`
 //---------------------------------------
 
 function ChairEntry(props) {
+  const { userInfo } = props;
   const [jurorInfo, setJurorInfo] = useState(jurorInit);
   const [currantID, setCurrantID] = useState('');
+
+  //---------------------------------------
+  // 保護路由
+  useEffect(() => {
+    if (!userInfo || !userInfo.isAdmin) {
+      // 用戶無登入或不是管理員，轉向回首頁
+      props.history.push('/');
+    }
+  }, []);
+
+  //---------------------------------------
 
   useEffect(() => {
     // 從localStorage取上次選取的ID

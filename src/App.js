@@ -20,6 +20,7 @@ import TrialEntry from 'Pages/TrialEntry';
 import Monitor from 'Pages/Monitor';
 import Result from 'Pages/Result';
 import ResultForJuror from 'Pages/ResultForJuror';
+import Test from 'Pages/Test';
 
 //------------------------------------
 function App() {
@@ -29,6 +30,22 @@ function App() {
   const [userInfo, setUserInfo] = useState(getUserInfo);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const handleShowLoginModal = () => setShowLoginModal(true);
+
+  //------------------------------------
+
+  const handleAuth = (path, onlyAdmin) => {
+    // 保護路由:用戶權限
+    if (userInfo) {
+      // 保護路由:管理權限
+      if (!onlyAdmin || userInfo.isAdmin) {
+        return path;
+      } else {
+        return '/';
+      }
+    } else {
+      return '/';
+    }
+  };
 
   // 路由表
   //---------------------------------------
@@ -58,13 +75,13 @@ function App() {
         </Route>
 
         {/* 主計入口 */}
-        <Route exact path="/chairEntry">
-          <ChairEntry />
+        <Route exact path={handleAuth('/chairEntry', 'onlyAdmin')}>
+          <ChairEntry userInfo={userInfo} />
         </Route>
 
         {/* 主計儀表板 */}
-        <Route exact path="/chair">
-          <Chair />
+        <Route exact path={handleAuth('/chair', 'onlyAdmin')}>
+          <Chair userInfo={userInfo} />
         </Route>
 
         {/* 評審入口 */}
@@ -78,8 +95,8 @@ function App() {
         </Route>
 
         {/* 評判反饋畫面 */}
-        <Route exact path="/monitor">
-          <Monitor />
+        <Route exact path={handleAuth('/monitor')}>
+          <Monitor userInfo={userInfo} />
         </Route>
 
         {/* 結果 */}
@@ -90,6 +107,11 @@ function App() {
         {/* 結果(for個別評審) */}
         <Route exact path="/resultForJuror">
           <ResultForJuror />
+        </Route>
+
+        {/* for dev */}
+        <Route exact path="/test">
+          <Test />
         </Route>
 
         {/* 根路徑或未定義路徑，一律導向到/home */}

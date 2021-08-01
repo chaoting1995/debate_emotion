@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 // Icon
 import { FaUser, FaPlus, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 // 按鈕音效
-import btnAudio from 'Audio/yisell_sound_2014041023051918567_88366.mp3';
+import btnAudio from 'Audio//click.mp3';
 // Juror info
 import jurorInit from 'info/jurorInfo';
 

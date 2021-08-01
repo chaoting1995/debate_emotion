@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import { Howl } from 'howler';
 // 按鈕音效
-import btnAudio from 'Audio/yisell_sound_2014041023051918567_88366.mp3';
+import handleAudioClick from 'utils/handleAudioClick';
 
-import TmepoTimer from 'Components/TmepoTimer';
+import Timer from 'Components/Timer';
+import TempoTimer from 'Components/TempoTimer';
 import TrafficBar from 'Components/TrafficBar';
 import EmotionBar from 'Components/EmotionBar';
 
@@ -13,37 +13,14 @@ import styled from '@emotion/styled';
 
 const TrialUI = styled.div`
   ${'' /* background-color: #eee; */};
-  height: 100vh;
+  height: calc(100vh -56px);
   width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-
-  & > div {
-    width: 100%;
-  }
-  & > div:nth-of-type(1) {
-    height: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 30px;
-    & > .time {
-      font-size: 100px;
-      margin-bottom: 15px;
-    }
-    & > .round {
-      font-size: 25px;
-      color: #383d41;
-      background-color: #e2e3e5;
-      box-sizing: border-box;
-      padding: 5px 15px;
-      border: 1px solid #d6d8db;
-      border-radius: 10px;
-      text-align: center;
-    }
+  & > .row {
+    flex-wrap: nowrap;
   }
   & > div:nth-of-type(2) {
     display: flex;
@@ -120,27 +97,13 @@ function Trial(props) {
 
   //---------------------------------------
 
-  // const handleBtnAudio_Old = () => {
-  //   const audio = new Audio(btnAudio);
-  //   audio.play();
-  // };
-  //---------------------------------------
-  const handleBtnAudio = () => {
-    const sound = new Howl({
-      src: [btnAudio],
-    });
-    sound.play();
-  };
   //---------------------------------------
   return (
     <>
       <TrialUI className="container">
         {/* ------------------------------------ */}
-        <div className="row">
-          <div className="time">00:00</div>
-          <div className="round">正方二辯申論</div>
-        </div>
 
+        <Timer />
         {/* ------------------------------------ */}
         <div className="row">
           <div>
@@ -151,7 +114,7 @@ function Trial(props) {
               {/* 心情按鈕群 */}
               <TrafficBar
                 setColorCurrent={setColorCurrent}
-                handleBtnAudio={handleBtnAudio}
+                handleAudioClick={handleAudioClick}
               />
               {/* 心情溫度計 */}
               <EmotionBar
@@ -182,7 +145,7 @@ function Trial(props) {
               {/* 心情按鈕群 */}
               <TrafficBar
                 setColorCurrent={setColorCurrent}
-                handleBtnAudio={handleBtnAudio}
+                handleAudioClick={handleAudioClick}
               />
             </div>
           </div>
@@ -197,7 +160,7 @@ function Trial(props) {
             width: '100px',
           }}
         >
-          <TmepoTimer
+          <TempoTimer
             countdown={countdown}
             countdownSetting={countdownSetting}
             setCountdownSetting={setCountdownSetting}

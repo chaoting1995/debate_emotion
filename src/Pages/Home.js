@@ -58,6 +58,7 @@ function Home(props) {
                 ? handleShowLoginModal()
                 : props.history.push('/chairEntry');
               setLoginTo('Chair');
+              userInfo && !userInfo.isAdmin && alert('權限不足');
             }}
           />
 

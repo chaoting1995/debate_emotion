@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TmepoTimer(props) {
+function TempoTimer(props) {
   const { countdown, countdownSetting, setCountdownSetting, setInitTime } =
     props;
   return (
@@ -40,4 +40,4 @@ function TmepoTimer(props) {
     </>
   );
 }
-export default TmepoTimer;
+export default TempoTimer;

@@ -27,7 +27,7 @@ const TrafficBarUI = styled.div`
 `;
 
 function TrafficBar(props) {
-  const { setColorCurrent, handleBtnAudio } = props;
+  const { setColorCurrent, handleAudioClick } = props;
   return (
     <>
       <TrafficBarUI>
@@ -39,7 +39,7 @@ function TrafficBar(props) {
               className={`btn btn-${item}`}
               onClick={() => {
                 setColorCurrent(index + 1);
-                handleBtnAudio();
+                handleAudioClick();
               }}
             />
           );
