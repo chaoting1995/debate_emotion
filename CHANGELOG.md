@@ -34,3 +34,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### remind
 - 為了仿照APP，應在 app.js 統一設置 height:100vh;
 - 計時器顯示區，多半接來自後端的資料
+
+## 2021-08-02
+### Added
+ * 主席儀表板
+- 倒數計時功能
+- 三聲鈴響功能
+- 計時重置功能
+- 獲取更多計時種類icon

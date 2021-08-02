@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // 按鈕音效
-import handleAudioClick from 'utils/handleAudioClick';
+import { handleAudioClick } from 'utils/handleAudio';
 
 import Timer from 'Components/Timer';
 import TempoTimer from 'Components/TempoTimer';

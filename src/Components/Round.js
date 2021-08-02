@@ -1,7 +1,7 @@
 import React from 'react';
 
 // 按鈕音效
-import handleAudioClick from 'utils/handleAudioClick';
+import { handleAudioClick } from 'utils/handleAudio';
 
 import styled from '@emotion/styled';
 //------------------------------------

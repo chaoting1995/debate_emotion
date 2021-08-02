@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 // 按鈕音效
-import handleAudioClick from 'utils/handleAudioClick';
+import { handleAudioClick, handleAudioBell } from 'utils/handleAudio';
+
+import useInterval from 'hooks/useInterval.js';
 
 import {
   FaVolumeUp,
@@ -10,11 +12,22 @@ import {
   FaRedoAlt,
   FaConciergeBell,
   FaArrowDown,
+  FaMugHot,
+  FaHourglassHalf,
+  FaBuffer,
 } from 'react-icons/fa';
 
 import { BsPauseFill, BsPlayFill } from 'react-icons/bs';
-import { MdSettings } from 'react-icons/md';
+import {
+  MdSettings,
+  MdTimer,
+  MdSignalCellularConnectedNoInternet0Bar,
+  AiOutlineDisconnect,
+} from 'react-icons/md';
 
+import { RiCupFill, RiHome6Fill, RiTimerFill } from 'react-icons/ri';
+
+//---------------------------------------------------
 import moment from 'moment';
 //---------------------------------------------------
 import styled from '@emotion/styled';
@@ -110,30 +123,80 @@ const TimerWrap = styled.div`
     }
   }
 `;
+// -------------------------------------------------
 
 function Timer(props) {
   const { panel } = props;
 
+  const [delay] = useState(1000);
+  const [count, setCount] = useState(1 * 60);
+  const [isRunning, setIsRunning] = useState(false);
+
+  const [formatTime, setFormatTime] = useState(handleFormatTime(count));
+  // ------------------------------------------
+
+  function handleFormatTime(sec) {
+    const formatted = moment.utc(sec * 1000).format('mm:ss');
+    return formatted;
+  }
+  function handle3Ring(left) {
+    if (left === 60) handleAudioBell();
+
+    if (left === 30) {
+      handleAudioBell();
+      setTimeout(handleAudioBell, 1000);
+    }
+    if (left === 0) {
+      handleAudioBell();
+      setTimeout(handleAudioBell, 1000);
+      setTimeout(handleAudioBell, 2000);
+    }
+  }
+
+  useInterval(() => setCount(count - 1), isRunning ? delay : null);
+
+  useEffect(() => {
+    //
+    setFormatTime(handleFormatTime(count));
+    //
+    handle3Ring(count);
+    //
+    if (count <= 0) setIsRunning(false);
+  }, [count]);
+  // ------------------------------------------
+
   return (
     <>
       <TimerWrap className="container-fluid">
-        <div className="row">
-          <div className="time">00:00</div>
-          <div className="round">正方二辯申論</div>
-        </div>
-        {panel && <TimerPanel handleAudioClick={handleAudioClick} />}
+        <TimerMonitor formatTime={formatTime} />
+        {panel && (
+          <TimerPanel
+            isRunning={isRunning}
+            setIsRunning={setIsRunning}
+            count={count}
+            setCount={setCount}
+          />
+        )}
       </TimerWrap>
     </>
   );
 }
-function TimerShow() {
-  moment().format('HH:mm');
-  moment().seconds(0).milliseconds(0);
-  return <></>;
+// -------------------------------------------------
+function TimerMonitor(props) {
+  const { formatTime } = props;
+  return (
+    <>
+      <div className="row">
+        <div className="time">{formatTime}</div>
+        <div className="round">正方二辯申論</div>
+      </div>
+    </>
+  );
 }
+// -------------------------------------------------
 
 function TimerPanel(props) {
-  const { handleAudioClick } = props;
+  const { count, setCount, isRunning, setIsRunning } = props;
   return (
     <>
       <div className="row">
@@ -144,25 +207,38 @@ function TimerPanel(props) {
           />
         </div>
         <div className="icon-wrap">
-          <FaRedoAlt className="FaRedoAlt" onClick={() => handleAudioClick()} />
+          <FaRedoAlt
+            className="FaRedoAlt"
+            onClick={() => {
+              handleAudioClick();
+              setCount(3.5 * 60);
+              setIsRunning(false);
+            }}
+          />
         </div>
-        <div className="icon-wrap">
-          <BsPlayFill onClick={() => handleAudioClick()} />
+
+        <div
+          className="icon-wrap"
+          onClick={() => {
+            handleAudioClick();
+            if (count > 0) setIsRunning(!isRunning);
+          }}
+        >
+          {!isRunning ? <BsPlayFill /> : <BsPauseFill />}
         </div>
+
         <div className="icon-wrap">
           <FaConciergeBell
             className="FaConciergeBell"
-            onClick={() => handleAudioClick()}
+            onClick={() => handleAudioBell()}
           />
         </div>
         <div className="icon-wrap">
-          <MdSettings class="MdSettings" onClick={() => handleAudioClick()} />
+          <MdTimer class="MdSettings" onClick={() => handleAudioClick()} />
         </div>
       </div>
       {/* <div className="row">
-  <div className="icon-wrap">
-    <BsPauseFill className="BsPauseFill" />
-  </div>
+ 
   <div className="icon-wrap">
     <FaVolumeDown className="FaVolumeDown" />
   </div>
